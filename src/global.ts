@@ -31,4 +31,16 @@ html, body, div, span, applet, object, iframe,
         -webkit-tap-highlight-color: transparent;
     }
 
+    :root{
+        --backgroud-color: #1D1C29;
+        --primary-dark:    #090817;
+        --second-dark:     #222432;
+        --primary-light:   #FFFFFF;
+        --second-light:    #535A6B;
+        --contrast:        #30B2A8;
+        --hover:           #2D2F3D;
+
+
+    }
+
 `;
