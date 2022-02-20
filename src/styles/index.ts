@@ -1,5 +1,6 @@
 import styled from "styled-components";
-
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 //HOME PAGE BODY
 export const Container = styled.div`
   width: 100vw;
@@ -15,7 +16,7 @@ export const Container = styled.div`
 
     display: grid;
     gap: 10px;
-    grid-template: 1fr 1fr 2fr 2fr / 1fr 1fr;
+    grid-template: 0.5fr 0.5fr 2fr 2fr / 1fr 1fr;
 
     grid-template-areas:
       " login-model login-model"
@@ -24,8 +25,11 @@ export const Container = styled.div`
       " content-boxII content-boxII";
 
     .search {
-      background-color: purple;
       grid-area: search;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .login-model {
       background-color: plum;
@@ -40,7 +44,6 @@ export const Container = styled.div`
       grid-area: content-boxII;
     }
   }
-
   @media (min-width: 760px) {
     display: grid;
     gap: 10px;
@@ -67,8 +70,55 @@ export const Container = styled.div`
   }
 `;
 
+//MUI HOME
+export const InputBox = styled(Box)`
+  width: 280px;
+  height: 40px;
+  border-radius: 15px;
+
+  background-color: var(--hover);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .icon {
+    color: var(--contrast);
+    width: 50px;
+    height: inherit;
+    background-color: var(--second-dark);
+    font-size: 1.5rem;
+
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (min-width: 760px) {
+    width: 430px;
+  }
+`;
+//MUI TEXTFIELD
+export const InputField = styled(TextField)`
+  width: 90%;
+  div {
+    color: var(--primary-light);
+
+    fieldset {
+      all: unset;
+    }
+  }
+`;
+
 //SIDEMENU BODY
 export const MenuContainer = styled.div`
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+
   position: fixed;
   inset: 0;
 
