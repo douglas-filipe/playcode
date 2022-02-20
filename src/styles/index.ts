@@ -7,6 +7,64 @@ export const Container = styled.div`
 
   background-color: var(--backgroud-color);
   color: var(--primary-light);
+
+  display: flex;
+
+  .main-box {
+    flex-grow: 1;
+
+    display: grid;
+    gap: 10px;
+    grid-template: 1fr 1fr 2fr 2fr / 1fr 1fr;
+
+    grid-template-areas:
+      " login-model login-model"
+      " search search"
+      " content-boxI content-boxI"
+      " content-boxII content-boxII";
+
+    .search {
+      background-color: purple;
+      grid-area: search;
+    }
+    .login-model {
+      background-color: plum;
+      grid-area: login-model;
+    }
+    .content-boxI {
+      background-color: pink;
+      grid-area: content-boxI;
+    }
+    .content-boxII {
+      background-color: royalblue;
+      grid-area: content-boxII;
+    }
+  }
+
+  @media (min-width: 760px) {
+    display: grid;
+    gap: 10px;
+    grid-template: 1fr 2fr 2fr / 2fr 4fr 4fr;
+
+    grid-template-areas:
+      "side-menu main-box main-box"
+      "side-menu main-box main-box"
+      "side-menu main-box main-box";
+
+    .side-menu {
+      grid-area: side-menu;
+      overflow: auto;
+      min-width: 250px;
+    }
+    .main-box {
+      grid-area: main-box;
+      grid-template: 1fr 2fr 2fr / 3fr 1fr;
+      grid-template-areas:
+        " search login-model"
+        " content-boxI content-boxI"
+        " content-boxII content-boxII";
+    }
+  }
 `;
 
 //SIDEMENU BODY
@@ -101,7 +159,7 @@ export const MenuContainer = styled.div`
   .nav-menu-items {
     width: 100%;
   }
-  @media (min-width: 35em) {
+  @media (min-width: 760px) {
     .nav-menu {
       left: 0%;
       width: 250px;
