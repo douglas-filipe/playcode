@@ -32,8 +32,24 @@ export const Container = styled.div`
       justify-content: center;
     }
     .login-model {
-      background-color: plum;
       grid-area: login-model;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 1rem;
+
+      font-size: 1.1rem;
+      span {
+        margin: 0 2px 0 10px;
+      }
+      svg {
+        color: var(--contrast);
+        font-size: 1.2rem;
+      }
+      .user-icon {
+        font-size: 2rem;
+      }
     }
     .content-boxI {
       background-color: pink;
@@ -66,6 +82,21 @@ export const Container = styled.div`
         " search login-model"
         " content-boxI content-boxI"
         " content-boxII content-boxII";
+
+      .login-model {
+        padding: 0 2rem 0;
+        span {
+          cursor: pointer;
+        }
+
+        font-size: 1.5rem;
+        svg {
+          cursor: pointer;
+        }
+        .user-icon {
+          font-size: 3rem;
+        }
+      }
     }
   }
 `;
@@ -96,6 +127,7 @@ export const InputBox = styled(Box)`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
   @media (min-width: 760px) {
     width: 430px;

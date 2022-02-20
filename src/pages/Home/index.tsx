@@ -1,6 +1,7 @@
 import { SideMenu } from "../../components/Menu";
 import { Container, InputBox, InputField } from "../../styles";
-import { FiSearch } from "react-icons/fi";
+import * as Icons from "react-icons/fi";
+import { MdAccountCircle } from "react-icons/md";
 
 export const Home = () => {
   return (
@@ -12,13 +13,17 @@ export const Home = () => {
       <div className="main-box">
         <div className="search">
           <InputBox>
-            <InputField />
+            <InputField placeholder="Pesquise aqui" />
             <div className="icon">
-              <FiSearch />
+              <Icons.FiSearch />
             </div>
           </InputBox>
         </div>
-        <div className="login-model">login</div>
+        <div className="login-model">
+          <MdAccountCircle className="user-icon" />
+          <span>User</span>
+          <Icons.FiChevronDown />
+        </div>
         <div className="content-boxI">content I</div>
         <div className="content-boxII">content II</div>
       </div>
