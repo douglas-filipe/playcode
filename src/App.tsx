@@ -1,11 +1,11 @@
-import { Routes } from "react-router-dom";
 import { GlobalStyle } from "./global";
+import { RoutesMain } from "./routes";
 
 const App = () => {
   return (
     <>
-      <Routes />
       <GlobalStyle />
+      <RoutesMain />
     </>
   );
 };

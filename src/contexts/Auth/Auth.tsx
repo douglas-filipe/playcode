@@ -8,8 +8,16 @@ export const AuthProvider = ({ children }: ContextProp) => {
     localStorage.getItem("@playcode/token") || ""
   );
 
+  const [user_id, setUser_id] = useState<string>(
+    localStorage.getItem("@playcode/user_id") || ""
+  );
+
+  const [name, setName] = useState<string>(
+    localStorage.getItem("@playcode/name") || ""
+  );
+
   return (
-    <AuthContext.Provider value={{ setToken, token }}>
+    <AuthContext.Provider value={{ setToken, token, name, user_id }}>
       {children}
     </AuthContext.Provider>
   );
