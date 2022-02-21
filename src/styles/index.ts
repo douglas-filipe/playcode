@@ -52,12 +52,40 @@ export const Container = styled.div`
       }
     }
     .content-boxI {
-      background-color: pink;
       grid-area: content-boxI;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      svg {
+        color: var(--contrast);
+        font-size: 2rem;
+      }
+      span {
+        margin-left: 1.5rem;
+        align-self: flex-start;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
     }
     .content-boxII {
-      background-color: royalblue;
       grid-area: content-boxII;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      svg {
+        color: var(--contrast);
+        font-size: 2rem;
+      }
+      span {
+        margin-left: 1.5rem;
+        align-self: flex-start;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
     }
   }
   @media (min-width: 760px) {
@@ -83,6 +111,11 @@ export const Container = styled.div`
         " content-boxI content-boxI"
         " content-boxII content-boxII";
 
+      .search {
+        margin-left: 5rem;
+        justify-content: flex-start;
+      }
+
       .login-model {
         padding: 0 2rem 0;
         span {
@@ -95,6 +128,18 @@ export const Container = styled.div`
         }
         .user-icon {
           font-size: 3rem;
+        }
+      }
+      .content-boxI {
+        span {
+          margin-left: 5rem;
+          font-size: 2rem;
+        }
+      }
+      .content-boxII {
+        span {
+          margin-left: 5rem;
+          font-size: 2rem;
         }
       }
     }
@@ -262,4 +307,12 @@ export const MenuContainer = styled.div`
       display: none;
     }
   }
+`;
+
+//VIDEO CARDS COMPONENT
+export const VideoContainer = styled.div`
+  width: 200px;
+  height: 241px;
+
+  background-color: rosybrown;
 `;
