@@ -1,19 +1,29 @@
-import { useEffect } from "react";
-import { io } from "socket.io-client";
 
 export const Home = () => {
-  useEffect(() => {
-    const socket = io("ws://localhost:3000");
-    socket.on("connection", () => {
-      console.log("connected to server");
-    });
-    socket.on("Teste", () => {
-      console.log("Foi");
-    });
-  }, []);
   return (
-    <div>
-      <div>Ola</div>
-    </div>
+    <Container>
+      <div className="side-menu">
+        <SideMenu />
+      </div>
+
+      <div className="main-box">
+        <div className="search">
+          <InputBox>
+            <InputField placeholder="Pesquise aqui" />
+            <div className="icon">
+              <Icons.FiSearch />
+            </div>
+          </InputBox>
+        </div>
+        <div className="login-model">
+          <MdAccountCircle className="user-icon" />
+          <span>User</span>
+          <Icons.FiChevronDown />
+        </div>
+        <div className="content-boxI">content I</div>
+        <div className="content-boxII">content II</div>
+      </div>
+    </Container>
+
   );
 };
