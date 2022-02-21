@@ -1,3 +1,9 @@
+import { SideMenu } from "../../components/Menu";
+import { Container } from "../../styles";
 export const Home = () => {
-  return <div>Hello</div>;
+  return (
+    <Container>
+      <SideMenu />
+    </Container>
+  );
 };
