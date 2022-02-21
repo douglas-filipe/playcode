@@ -27,7 +27,7 @@ interface IuserDetails {
 
 export const Chat = () => {
   const { room_id } = useParams<{ room_id: string }>();
-  const socket = io("ws://localhost:3000");
+  const socket = io("https://playcodeapi.herokuapp.com");
   const { name, user_id, token } = useAuth();
   const [inputMessage, setInputMessages] = useState("");
   const [messages, setMessages] = useState<Imessage[]>([]);
@@ -99,7 +99,8 @@ export const Chat = () => {
               return (
                 <div>
                   <p>
-                    <span style={{fontWeight: "bold"}}>{e.name}:</span> {e.text}
+                    <span style={{ fontWeight: "bold" }}>{e.name}:</span>{" "}
+                    {e.text}
                   </p>
                 </div>
               );
