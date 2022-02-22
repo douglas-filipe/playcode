@@ -3,10 +3,10 @@ import { Container, InputBox, InputField } from "../../styles";
 import * as Icons from "react-icons/fi";
 import { MdAccountCircle } from "react-icons/md";
 import { UserModal } from "../../components/UserModal";
-import { useModalUser } from "../../contexts/ModalUser";
+import { useModals } from "../../contexts/Modals";
 
 export const Home = () => {
-  const { setOpenUserMenu, openUserMenu } = useModalUser();
+  const { setOpenUserMenu, openUserMenu } = useModals();
   return (
     <Container>
       <div className="side-menu">

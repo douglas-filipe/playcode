@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AiFillCloseCircle, AiOutlineMail } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  AiFillCloseCircle,
+  AiOutlineMail,
+  AiOutlineUser,
+} from "react-icons/ai";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth";
 import api from "../../services/api";
-import { Container } from "./LoginModal.styles";
+import { Container } from "./SignupModal.styles";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { PulseLoader } from "react-spinners";
 import { useModals } from "../../contexts/Modals";
@@ -20,37 +24,49 @@ interface IAxiosResponseLogin {
   name: string;
 }
 
-export const LoginModal = () => {
+export const SignupModal = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const { handleSubmit, register } = useForm();
   //const navigate = useNavigate();
   const { setToken } = useAuth();
-  const { openModalLogin, setOpenModalLogin, setOpenModalSignup } = useModals();
+  const { openModalSignup, setOpenModalSignup, setOpenModalLogin } =
+    useModals();
 
   const onSubmit = async (data: IdataLogin) => {
     try {
       setLoading(true);
-      const response = await api.post<IAxiosResponseLogin>("/login", data);
-      localStorage.setItem("@playcode/token", response.data.token);
-      setToken(response.data.token);
+      await api.post<IAxiosResponseLogin>("/users", data);
+      const responseLogin = await api.post<IAxiosResponseLogin>("/login", data);
+      setOpenModalSignup(false);
       setLoading(false);
-      setOpenModalLogin(false);
-      toast.success("Sucesso ao logar!", { theme: "dark" });
+      setToken(responseLogin.data.token);
+      toast.success("Sucesso ao criar a sua conta!", { theme: "dark" });
     } catch (e) {
-      toast.error("Error ao fazer o login!", { theme: "dark" });
+      toast.error("Erro ao criar sua conta!", { theme: "dark" });
       setLoading(false);
     }
   };
   return (
-    <Container openModalLogin={openModalLogin}>
+    <Container openModalSignup={openModalSignup}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <AiFillCloseCircle
           className="closeModalLogin"
-          onClick={() => setOpenModalLogin(false)}
+          onClick={() => setOpenModalSignup(false)}
         />
-        <h1>Login</h1>
+        <h1>Cadastre-se</h1>
+        <div>
+          <AiOutlineUser />
+          <input
+            {...register("name", { required: true })}
+            type={"text"}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder="Nome"
+          />
+        </div>
         <div>
           <AiOutlineMail />
           <input
@@ -79,16 +95,16 @@ export const LoginModal = () => {
         >
           {loading ? <PulseLoader color="white" size={"10px"} /> : "Enviar"}
         </button>
-        <Link to={"/"}>Esqueceu sua senha?</Link>
         <p>
-          Não tem uma conta?{" "}
+          Já possui conta?
           <span
             onClick={() => {
-              setOpenModalLogin(false);
-              setOpenModalSignup(true);
+              setOpenModalSignup(false);
+              setOpenModalLogin(true);
             }}
           >
-            Cadastre-se
+            {" "}
+            Faça o login
           </span>
         </p>
       </form>

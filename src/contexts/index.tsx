@@ -1,11 +1,11 @@
 import { ContextProp } from "../types/AuthContext";
 import { AuthProvider } from "./Auth";
-import { ModalUserProvider } from "./ModalUser";
+import { ModalsProvider } from "./Modals";
 
 export const Providers = ({ children }: ContextProp) => {
   return (
     <AuthProvider>
-      <ModalUserProvider>{children}</ModalUserProvider>
+      <ModalsProvider>{children}</ModalsProvider>
     </AuthProvider>
   );
 };

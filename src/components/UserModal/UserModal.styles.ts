@@ -7,9 +7,8 @@ export const Container = styled.div<IstylesPropsUserModal>`
   display: flex;
   flex-direction: column;
   top: 60px;
-  width: 155px;
+  width: 200px;
   font-size: 14px;
-  padding: 20px;
   background: #121018;
   box-shadow: 1px 2px 4px #000000;
   visibility: ${(props) => (props.openUserMenu ? "visible" : "hidden")};
@@ -21,7 +20,13 @@ export const Container = styled.div<IstylesPropsUserModal>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
+    padding: 20px 10px;
+    cursor: pointer;
+  }
+
+  a:hover,
+  p:hover {
+    background: #1c1825;
   }
 
   @media (min-width: 768px) {

@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
-interface PropsLoginModal {
-  openModalLogin: boolean;
+interface PropsSignupModal {
+  openModalSignup: boolean;
 }
 
-export const Container = styled.div<PropsLoginModal>`
+export const Container = styled.div<PropsSignupModal>`
   background-color: rgba(0, 0, 0, 0.75);
   width: 100vw;
   height: 100vh;
   position: fixed;
   z-index: 99;
-  visibility: ${(props) => (props.openModalLogin ? "visible" : "hidden")};
+  visibility: ${(props) => (props.openModalSignup ? "visible" : "hidden")};
   animation: ${(props) =>
-    props.openModalLogin ? "animateBackground 0.1s" : "none"};
+    props.openModalSignup ? "animateBackground 0.1s" : "none"};
 
   @keyframes animateBackground {
     0% {
@@ -30,9 +30,9 @@ export const Container = styled.div<PropsLoginModal>`
     border-radius: 10px;
     position: relative;
     transform: ${(props) =>
-      props.openModalLogin ? "scale(100%)" : "scale(10%, 10%)"};
+      props.openModalSignup ? "scale(100%)" : "scale(10%, 10%)"};
     animation: ${(props) =>
-      props.openModalLogin ? "animateModal 0.2s" : "none"};
+      props.openModalSignup ? "animateModal 0.2s" : "none"};
     transition: 0.2s;
 
     @keyframes animateModal {

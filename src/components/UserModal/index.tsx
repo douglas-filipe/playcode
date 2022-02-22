@@ -8,11 +8,11 @@ import addAccount from "../../assets/icons/addAccount.svg";
 import login from "../../assets/icons/login.svg";
 import recuperatePass from "../../assets/icons/recuperatePass.svg";
 import { useAuth } from "../../contexts/Auth";
-import { useModalUser } from "../../contexts/ModalUser";
+import { useModals } from "../../contexts/Modals";
 
 export const UserModal = () => {
-  const { token } = useAuth();
-  const { openUserMenu } = useModalUser();
+  const { token, setToken } = useAuth();
+  const { openUserMenu, setOpenModalLogin, setOpenModalSignup } = useModals();
   return (
     <Container openUserMenu={openUserMenu}>
       {token ? (
@@ -32,18 +32,23 @@ export const UserModal = () => {
             <img src={video} alt="Seu canal" />
           </Link>
 
-          <p>
+          <p
+            onClick={() => {
+              localStorage.removeItem("@playcode/token");
+              setToken("");
+            }}
+          >
             <span>Sair</span>
             <img src={logout} alt="Sair da conta" />
           </p>
         </>
       ) : (
         <>
-          <p>
+          <p onClick={() => setOpenModalLogin(true)}>
             <span>Login</span>
             <img src={login} alt="Logar em sua conta" />
           </p>
-          <p>
+          <p onClick={() => setOpenModalSignup(true)}>
             <span>Criar conta</span>
             <img src={addAccount} alt="Criar conta" />
           </p>

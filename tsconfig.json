@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/contexts/ModalUser/index.tsx"]
+  "include": ["src", "src/contexts/Modals/.tsxx.tsx"]
 }
