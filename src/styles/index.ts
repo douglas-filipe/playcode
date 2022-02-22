@@ -274,6 +274,8 @@ export const MenuContainer = styled.div`
       padding: 0 20px;
       svg {
         margin-right: 20px;
+        width: 24px;
+        height: 24px;
       }
     }
     :hover {

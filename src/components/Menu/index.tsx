@@ -5,6 +5,7 @@ import { FaHistory } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { BiGroup } from "react-icons/bi";
 
 export const SideMenu = () => {
   const [sidebar, setSidebar] = useState<boolean>(false);
@@ -49,6 +50,13 @@ export const SideMenu = () => {
             <Link to="#">
               <VscAccount />
               <span>Profile</span>
+            </Link>
+          </li>
+
+          <li className="nav-text">
+            <Link to="#">
+              <BiGroup />
+              <span>Grupos</span>
             </Link>
           </li>
         </ul>

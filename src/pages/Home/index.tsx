@@ -1,5 +1,12 @@
+import { SideMenu } from "../../components/Menu";
+import { Container, InputBox, InputField } from "../../styles";
+import * as Icons from "react-icons/fi";
+import { MdAccountCircle } from "react-icons/md";
+import { UserModal } from "../../components/UserModal";
+import { useModalUser } from "../../contexts/ModalUser";
 
 export const Home = () => {
+  const { setOpenUserMenu, openUserMenu } = useModalUser();
   return (
     <Container>
       <div className="side-menu">
@@ -15,15 +22,25 @@ export const Home = () => {
             </div>
           </InputBox>
         </div>
-        <div className="login-model">
-          <MdAccountCircle className="user-icon" />
-          <span>User</span>
-          <Icons.FiChevronDown />
-        </div>
+        {openUserMenu ? (
+          <div className="login-model" onClick={() => setOpenUserMenu(false)}>
+            <MdAccountCircle className="user-icon" />
+            <span>User</span>
+            <Icons.FiChevronDown />
+            <UserModal />
+          </div>
+        ) : (
+          <div className="login-model" onClick={() => setOpenUserMenu(true)}>
+            <MdAccountCircle className="user-icon" />
+            <span>User</span>
+            <Icons.FiChevronDown />
+            <UserModal />
+          </div>
+        )}
+
         <div className="content-boxI">content I</div>
         <div className="content-boxII">content II</div>
       </div>
     </Container>
-
   );
 };

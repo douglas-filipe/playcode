@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
-import { useAuth } from "../../contexts/Auth/Auth";
+import { useAuth } from "../../contexts/Auth";
 import api from "../../services/api";
-import { Container } from "./styles";
+import { Container } from "./Chat.styles";
 
 interface IsendMessage {
   text?: string;
@@ -71,24 +71,8 @@ export const Chat = () => {
     reqMessagesRoom();
   }, []);
 
-  /* useEffect(() => {
-    socket.emit("get-messages-history", room_id);
-    socket.on("output-messages", (messages) => {
-      setMessagesList(messages);
-    });
-    setLoading(true);
-  }, []); */
-
   const reqSendMessage = async (data: IsendMessage) => {
     if (inputMessage !== "") {
-      /* const message = {
-        user_id: userDetails.id,
-        name: userDetails.name,
-        room_id,
-        text: data.text,
-        createdOn: "Dfgdgf"
-      };
-      socket.emit("sendMessage", message, room_id); */
       const response = await api.post("/message", {
         text: data.text,
         room_id,
@@ -96,18 +80,7 @@ export const Chat = () => {
         name: userDetails.name,
       });
 
-      /* socket.on("message", (message) => {
-        console.log("Nova mensagem: ", message);
-        console.log("Anteriores: ", messagesList);
-        /* setMessagesList((prevState: any) => {
-          prevState(message);
-        }); */
-
       setMessagesList([...messagesList, response.data]);
-      /* socket.emit("get-messages-history", room_id);
-      socket.on("output-messages", (messages) => {
-        setMessagesList(messages);
-      }); */
     }
     setInputMessages("");
   };

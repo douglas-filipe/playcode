@@ -1,0 +1,58 @@
+import { Link } from "react-router-dom";
+import { Container } from "./UserModal.styles";
+import sendVideo from "../../assets/icons/sendVideo.svg";
+import edit from "../../assets/icons/edit.svg";
+import video from "../../assets/icons/videos.svg";
+import logout from "../../assets/icons/logout.svg";
+import addAccount from "../../assets/icons/addAccount.svg";
+import login from "../../assets/icons/login.svg";
+import recuperatePass from "../../assets/icons/recuperatePass.svg";
+import { useAuth } from "../../contexts/Auth";
+import { useModalUser } from "../../contexts/ModalUser";
+
+export const UserModal = () => {
+  const { token } = useAuth();
+  const { openUserMenu } = useModalUser();
+  return (
+    <Container openUserMenu={openUserMenu}>
+      {token ? (
+        <>
+          <Link to={"/"}>
+            <span>Enviar vídeo</span>
+            <img src={sendVideo} alt="Enviar video" />
+          </Link>
+
+          <Link to={"/"}>
+            <span>Editar canal</span>
+            <img src={edit} alt="Editar canal" />
+          </Link>
+
+          <Link to={"/"}>
+            <span>Seu canal</span>
+            <img src={video} alt="Seu canal" />
+          </Link>
+
+          <p>
+            <span>Sair</span>
+            <img src={logout} alt="Sair da conta" />
+          </p>
+        </>
+      ) : (
+        <>
+          <p>
+            <span>Login</span>
+            <img src={login} alt="Logar em sua conta" />
+          </p>
+          <p>
+            <span>Criar conta</span>
+            <img src={addAccount} alt="Criar conta" />
+          </p>
+          <Link to={"/"}>
+            <span>Recuperar senha</span>
+            <img src={recuperatePass} alt="Recuperar senha" />
+          </Link>
+        </>
+      )}
+    </Container>
+  );
+};
