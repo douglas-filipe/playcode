@@ -70,6 +70,7 @@ export const Chat = () => {
     socket.emit("get-messages-history", room_id);
     socket.on("output-messages", (messages) => {
       setMessagesList(messages);
+      setLoading(true);
     });
   }, []);
 
@@ -82,10 +83,8 @@ export const Chat = () => {
         name: userDetails.name,
       });
       setMessagesList([...messagesList, response.data]);
-      socket.emit("get-messages-history", room_id);
-      socket.on("output-messages", (messages) => {
-        socket.emit("message", messages);
-      });
+      const message = [...messagesList, response.data];
+      socket.emit("messagesList", message, room_id);
     }
     setInputMessages("");
   };

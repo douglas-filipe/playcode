@@ -3,14 +3,26 @@ import styled from "styled-components";
 export const Container = styled.main`
   background-color: #1d1c2a;
   display: flex;
-  border: 1px solid red;
-  width: 60vw;
-  margin: auto auto 700px auto;
+  position: relative;
   .videosRecentsList {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 20px;
+    justify-content: space-around;
+    gap: 40px;
+    margin-top: 70px;
+  }
+
+  @media (min-width: 768px) {
+    width: 60vw;
+    margin-left: 280px;
+  }
+
+  @media (min-width: 1088px) {
+    width: 70vw;
+  }
+
+  @media (min-width: 1440px) {
+    width: 70vw;
+    margin-left: 300px;
   }
 `;

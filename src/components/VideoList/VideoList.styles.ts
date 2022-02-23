@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
+  margin: auto;
   .title {
     color: white;
     margin-top: 11px;

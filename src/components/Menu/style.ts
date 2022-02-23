@@ -22,7 +22,7 @@ export const MenuContainer = styled.div`
   }
 
   .navbar {
-    padding: 1rem;
+    padding: 5px;
     font-size: 2rem;
     a {
       color: var(--contrast);
