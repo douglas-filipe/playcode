@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { useAuth } from "../../contexts/Auth";
-import api from "../../services/api";
+import api, { deploy } from "../../services/api";
 import { Container } from "./Chat.styles";
 import { IoMdSend } from "react-icons/io";
 import { RotateLoader } from "react-spinners";
@@ -32,7 +32,7 @@ interface Iroom {
 
 export const Chat = () => {
   const { room_id } = useParams<{ room_id: string }>();
-  const socket = io("http://localhost:3000");
+  const socket = io(deploy);
   const { name, user_id, token } = useAuth();
   const [inputMessage, setInputMessages] = useState("");
   const [userDetails, setUserDetails] = useState<IuserDetails>(
@@ -63,8 +63,8 @@ export const Chat = () => {
 
   const reqRoomSearch = async () => {
     const response = await api.get(`/room/${room_id}`);
-    console.log(response.data)
-    console.log()
+    console.log(response.data);
+    console.log();
     setRoom(response.data);
   };
 
@@ -103,7 +103,7 @@ export const Chat = () => {
 
     setInputMessages("");
   };
-  console.log(room)
+  console.log(room);
 
   return (
     <Container>

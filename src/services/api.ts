@@ -1,9 +1,9 @@
 import axios from "axios";
-const local = "http://localhost:3000";
-const deploy = "https://playcodeapi.herokuapp.com";
+export const local = "http://localhost:3000";
+export const deploy = "https://playcodeapi.herokuapp.com";
 
 const api = axios.create({
-  baseURL: local,
+  baseURL: deploy,
 });
 
 export default api;

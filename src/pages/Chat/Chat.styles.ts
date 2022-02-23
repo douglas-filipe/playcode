@@ -71,6 +71,19 @@ export const Container = styled.div`
     margin: 20px auto 0px auto;
     border: 0.5px solid #55527a;
     overflow-x: hidden;
+
+    ::-webkit-scrollbar {
+      width: 10px; /* width of the entire scrollbar */
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1c2230; /* color of the tracking area */
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background-color: #0e1222; /* color of the scroll thumb */
+      border-radius: 20px; /* roundness of the scroll thumb */
+    }
   }
 
   .messageUser {
@@ -143,7 +156,7 @@ export const Container = styled.div`
         margin: 10px 0px 20px 0px;
         border-radius: 0px 6px 6px 6px;
         color: black;
-        transform: translateX(205%);
+        transform: translateX(200%);
         word-break: break-all;
       }
     }
