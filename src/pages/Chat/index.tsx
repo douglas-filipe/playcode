@@ -27,12 +27,10 @@ export const Chat = () => {
   const socket = io("ws://localhost:3000");
   const { name, user_id, token } = useAuth();
   const [inputMessage, setInputMessages] = useState("");
-
   const [userDetails, setUserDetails] = useState<IuserDetails>(
     {} as IuserDetails
   );
   const [messagesList, setMessagesList] = useState<Imessage[]>([]);
-
   const { handleSubmit, register } = useForm();
 
   const messageEl = useRef<null | HTMLDivElement>(null);
@@ -46,11 +44,6 @@ export const Chat = () => {
       });
     }
   }, [messagesList]);
-
-  const reqMessagesRoom = async () => {
-    const response = await api.get(`/messages/${room_id}`);
-    setMessagesList(response.data);
-  };
 
   const reqUserDetails = async () => {
     const response = await api.get("/users", {
@@ -66,9 +59,18 @@ export const Chat = () => {
       setLoading(true);
     })();
   }, []);
+  useEffect(() => {
+    socket.on("message", (message) => {
+      console.log(message);
+      setMessagesList(message);
+    });
+  }, []);
 
   useEffect(() => {
-    reqMessagesRoom();
+    socket.emit("get-messages-history", room_id);
+    socket.on("output-messages", (messages) => {
+      setMessagesList(messages);
+    });
   }, []);
 
   const reqSendMessage = async (data: IsendMessage) => {
@@ -79,8 +81,11 @@ export const Chat = () => {
         user_id: userDetails.id,
         name: userDetails.name,
       });
-
       setMessagesList([...messagesList, response.data]);
+      socket.emit("get-messages-history", room_id);
+      socket.on("output-messages", (messages) => {
+        socket.emit("message", messages);
+      });
     }
     setInputMessages("");
   };

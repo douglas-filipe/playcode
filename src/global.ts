@@ -29,6 +29,8 @@ html, body, div, span, applet, object, iframe,
 
     body{
         -webkit-tap-highlight-color: transparent;
+        background: #1d1c2a;
+        color: white;
     }
 
     :root{

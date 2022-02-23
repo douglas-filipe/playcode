@@ -41,7 +41,7 @@ export const SideMenu = () => {
             </Link>
           </li>
           <li className="nav-text">
-            <Link to="#">
+            <Link to="/recents">
               <FaHistory />
               <span>Recentes</span>
             </Link>

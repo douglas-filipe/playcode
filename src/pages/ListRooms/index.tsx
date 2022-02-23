@@ -10,7 +10,7 @@ interface Irooms {
 export const ListRooms = () => {
   const [rooms, setRooms] = useState<Irooms[]>([]);
   useEffect(() => {
-    const socket = io("ws://localhost:3000");
+    const socket = io("https://playcodeapi.herokuapp.com");
     socket.on("connection", () => {
       console.log("connected to server");
     });
