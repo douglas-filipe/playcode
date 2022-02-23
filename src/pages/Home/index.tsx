@@ -1,9 +1,8 @@
 import { SideMenu } from "../../components/Menu";
-import { Container, InputBox, InputField } from "../../styles";
+import { Container, InputBox, InputField } from "./style";
 import * as Icons from "react-icons/fi";
-import { MdAccountCircle } from "react-icons/md";
-import { UserModal } from "../../components/UserModal";
 import { useModals } from "../../contexts/Modals";
+import { UserBadge } from "../../components/UserBadge";
 
 export const Home = () => {
   const { setOpenUserMenu, openUserMenu } = useModals();
@@ -23,23 +22,25 @@ export const Home = () => {
           </InputBox>
         </div>
         {openUserMenu ? (
-          <div className="login-model" onClick={() => setOpenUserMenu(false)}>
-            <MdAccountCircle className="user-icon" />
-            <span>User</span>
-            <Icons.FiChevronDown />
-            <UserModal />
-          </div>
+          <UserBadge
+            setOpenUserMenu={setOpenUserMenu}
+            openUserMenu={openUserMenu}
+          />
         ) : (
-          <div className="login-model" onClick={() => setOpenUserMenu(true)}>
-            <MdAccountCircle className="user-icon" />
-            <span>User</span>
-            <Icons.FiChevronDown />
-            <UserModal />
-          </div>
+          <UserBadge
+            setOpenUserMenu={setOpenUserMenu}
+            openUserMenu={openUserMenu}
+          />
         )}
 
-        <div className="content-boxI">content I</div>
-        <div className="content-boxII">content II</div>
+        <div className="content-boxI">
+          <span>Em alta</span>
+          <Icons.FiChevronDown />
+        </div>
+        <div className="content-boxII">
+          <span>Recentes</span>
+          <Icons.FiChevronDown />
+        </div>
       </div>
     </Container>
   );

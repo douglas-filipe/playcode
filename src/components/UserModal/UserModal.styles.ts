@@ -30,6 +30,6 @@ export const Container = styled.div<IstylesPropsUserModal>`
   }
 
   @media (min-width: 768px) {
-    top: 125px;
+    top: 70px;
   }
 `;

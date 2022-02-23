@@ -1,4 +1,4 @@
-import { MenuContainer } from "../../styles";
+import { MenuContainer } from "./style";
 import logo from "../../assets/img/logo.png";
 import * as Icon from "react-icons/ai";
 import { FaHistory } from "react-icons/fa";
