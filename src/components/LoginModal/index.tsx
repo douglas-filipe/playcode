@@ -34,6 +34,7 @@ export const LoginModal = () => {
       setLoading(true);
       const response = await api.post<IAxiosResponseLogin>("/login", data);
       localStorage.setItem("@playcode/token", response.data.token);
+      localStorage.setItem("@playcode/username", response.data.name);
       setToken(response.data.token);
       setLoading(false);
       setOpenModalLogin(false);
