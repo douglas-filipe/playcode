@@ -18,21 +18,21 @@ interface Ivideos {
   };
 }
 
-export const Recents = () => {
-  const [listVideosRecents, setListVideosRecents] = useState<Ivideos[]>([]);
-  const reqRecentsVideos = async () => {
-    const response = await api.get("/videos/recents");
-    setListVideosRecents(response.data);
+export const InHigh = () => {
+  const [listVideosInHigh, setListVideosInHigh] = useState<Ivideos[]>([]);
+  const reqInHighVideos = async () => {
+    const response = await api.get("/videos/populate");
+    setListVideosInHigh(response.data);
   };
   useEffect(() => {
-    reqRecentsVideos();
+    reqInHighVideos();
   }, []);
 
   return (
     <Container>
       <SideMenu />
       <section className="videosRecentsList">
-        {listVideosRecents.map((e) => {
+        {listVideosInHigh.map((e) => {
           return (
             <VideoList
               id={e.id}

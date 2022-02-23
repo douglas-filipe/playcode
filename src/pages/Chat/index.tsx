@@ -5,6 +5,8 @@ import { io } from "socket.io-client";
 import { useAuth } from "../../contexts/Auth";
 import api from "../../services/api";
 import { Container } from "./Chat.styles";
+import { IoMdSend } from "react-icons/io";
+import { RotateLoader } from "react-spinners";
 
 interface IsendMessage {
   text?: string;
@@ -14,6 +16,7 @@ interface Imessage {
   id: string;
   name: string;
   text: string;
+  user_id: string;
 }
 
 interface IuserDetails {
@@ -22,15 +25,21 @@ interface IuserDetails {
   user_id: string;
 }
 
+interface Iroom {
+  name: string;
+  img: string;
+}
+
 export const Chat = () => {
   const { room_id } = useParams<{ room_id: string }>();
-  const socket = io("ws://localhost:3000");
+  const socket = io("http://localhost:3000");
   const { name, user_id, token } = useAuth();
   const [inputMessage, setInputMessages] = useState("");
   const [userDetails, setUserDetails] = useState<IuserDetails>(
     {} as IuserDetails
   );
   const [messagesList, setMessagesList] = useState<Imessage[]>([]);
+  const [room, setRoom] = useState<Iroom>({} as Iroom);
   const { handleSubmit, register } = useForm();
 
   const messageEl = useRef<null | HTMLDivElement>(null);
@@ -52,16 +61,23 @@ export const Chat = () => {
     setUserDetails(response.data);
   };
 
+  const reqRoomSearch = async () => {
+    const response = await api.get(`/room/${room_id}`);
+    console.log(response.data)
+    console.log()
+    setRoom(response.data);
+  };
+
   useEffect(() => {
     (async () => {
       socket.emit("join", { name, room_id, user_id });
       await reqUserDetails();
+      await reqRoomSearch();
       setLoading(true);
     })();
   }, []);
   useEffect(() => {
     socket.on("message", (message) => {
-      console.log(message);
       setMessagesList(message);
     });
   }, []);
@@ -75,47 +91,65 @@ export const Chat = () => {
   }, []);
 
   const reqSendMessage = async (data: IsendMessage) => {
-    if (inputMessage !== "") {
-      const response = await api.post("/message", {
-        text: data.text,
-        room_id,
-        user_id: userDetails.id,
-        name: userDetails.name,
-      });
-      setMessagesList([...messagesList, response.data]);
-      const message = [...messagesList, response.data];
-      socket.emit("messagesList", message, room_id);
-    }
+    const response = await api.post("/message", {
+      text: inputMessage,
+      room_id,
+      user_id: userDetails.id,
+      name: userDetails.name,
+    });
+    setMessagesList([...messagesList, response.data]);
+    const message = [...messagesList, response.data];
+    socket.emit("messagesList", message, room_id);
+
     setInputMessages("");
   };
+  console.log(room)
 
   return (
     <Container>
       {loading ? (
         <>
           <div className="Messages" ref={messageEl}>
+            <div className="Room">{room.name}</div>
             {messagesList.map((e) => {
               return (
-                <div>
-                  <p>
-                    <span style={{ fontWeight: "bold" }}>{e.name}:</span>{" "}
-                    {e.text}
-                  </p>
+                <div
+                  className={
+                    e.user_id === userDetails.id
+                      ? "messageUser Owner"
+                      : "messageUser"
+                  }
+                >
+                  <div className="profileUser">
+                    <div className="photo">{e.name.substring(0, 1)}</div>
+                    <div className="info">
+                      <p>{e.name}</p>
+                    </div>
+                  </div>
+                  <p className="messageInfo">{e.text}</p>
                 </div>
               );
             })}
           </div>
           <form onSubmit={handleSubmit(reqSendMessage)}>
             <input
-              {...register("text")}
+              {...(register("text"), { required: true })}
               value={inputMessage}
               onChange={(e) => setInputMessages(e.target.value)}
             />
-            <button type="submit">Enviar</button>
+            <div></div>
+            <button type="submit">
+              <IoMdSend />
+            </button>
           </form>
         </>
       ) : (
-        <p>Carregando mensagens...</p>
+        <div className="loadingMessage">
+          <div className="Loading">
+            <RotateLoader color="yellow" />
+          </div>
+          <span>Carregando mensagens...</span>
+        </div>
       )}
     </Container>
   );

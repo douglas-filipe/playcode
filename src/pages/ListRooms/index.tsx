@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { Room } from "../../components/Room";
+import { Container } from "./ListRooms.styles";
 
 interface Irooms {
   id: string;
   name: string;
+  img: string;
 }
 
 export const ListRooms = () => {
@@ -20,10 +22,13 @@ export const ListRooms = () => {
   }, []);
 
   return (
-    <div>
-      {rooms.map((e) => {
-        return <Room id={e.id} name={e.name} key={e.id} />;
-      })}
-    </div>
+    <Container>
+      <h1>Selecione uma sala</h1>
+      <section className="listRooms">
+        {rooms.map((e) => {
+          return <Room key={e.id} id={e.id} name={e.name} img={e.img} />;
+        })}
+      </section>
+    </Container>
   );
 };

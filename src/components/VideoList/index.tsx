@@ -11,6 +11,7 @@ interface Ivideos {
   avatarUrl?: string;
   id_channel?: string;
   name_channel?: string;
+  text?: string;
 }
 
 export const VideoList = ({
@@ -23,6 +24,7 @@ export const VideoList = ({
   avatarUrl,
   id_channel,
   name_channel,
+  text,
 }: Ivideos) => {
   return (
     <Container>

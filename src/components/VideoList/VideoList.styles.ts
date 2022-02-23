@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
   margin: auto;
   .title {
     color: white;
@@ -11,6 +10,7 @@ export const Container = styled.div`
     font-weight: 600;
     font-size: 18px;
   }
+
   .channel {
     display: flex;
     align-items: center;
