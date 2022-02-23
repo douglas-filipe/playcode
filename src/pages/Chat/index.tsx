@@ -44,6 +44,7 @@ export const Chat = () => {
 
   const messageEl = useRef<null | HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [sendMessageBlock, setSendMessageBlock] = useState<boolean>(false);
 
   useEffect(() => {
     if (messageEl) {
@@ -63,8 +64,6 @@ export const Chat = () => {
 
   const reqRoomSearch = async () => {
     const response = await api.get(`/room/${room_id}`);
-    console.log(response.data);
-    console.log();
     setRoom(response.data);
   };
 
@@ -90,7 +89,8 @@ export const Chat = () => {
     });
   }, []);
 
-  const reqSendMessage = async (data: IsendMessage) => {
+  const reqSendMessage = async () => {
+    setSendMessageBlock(true);
     const response = await api.post("/message", {
       text: inputMessage,
       room_id,
@@ -100,10 +100,9 @@ export const Chat = () => {
     setMessagesList([...messagesList, response.data]);
     const message = [...messagesList, response.data];
     socket.emit("messagesList", message, room_id);
-
     setInputMessages("");
+    setSendMessageBlock(false);
   };
-  console.log(room);
 
   return (
     <Container>
@@ -138,7 +137,7 @@ export const Chat = () => {
               onChange={(e) => setInputMessages(e.target.value)}
             />
             <div></div>
-            <button type="submit">
+            <button type="submit" disabled={sendMessageBlock ? true : false}>
               <IoMdSend />
             </button>
           </form>

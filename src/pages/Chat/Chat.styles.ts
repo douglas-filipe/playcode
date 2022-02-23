@@ -48,6 +48,11 @@ export const Container = styled.div`
       color: white;
       margin-right: 10px;
       cursor: pointer;
+      :disabled {
+        svg {
+          filter: brightness(0.8);
+        }
+      }
       svg {
         width: 30px;
         height: 30px;
@@ -79,7 +84,7 @@ export const Container = styled.div`
     ::-webkit-scrollbar-track {
       background: #1c2230; /* color of the tracking area */
     }
-    
+
     ::-webkit-scrollbar-thumb {
       background-color: #0e1222; /* color of the scroll thumb */
       border-radius: 20px; /* roundness of the scroll thumb */
