@@ -15,12 +15,16 @@ export const Container = styled.main`
   .videosRecentsList {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 30px;
   }
 
   @media (min-width: 768px) {
     width: 60vw;
     margin-left: 280px;
+    .videosRecentsList {
+      align-items: center;
+      width: 100%;
+    }
   }
 
   @media (min-width: 1088px) {
@@ -30,5 +34,6 @@ export const Container = styled.main`
   @media (min-width: 1440px) {
     width: 70vw;
     margin-left: 300px;
+
   }
 `;
