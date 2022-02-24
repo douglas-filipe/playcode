@@ -99,10 +99,23 @@ export const MenuContainer = styled.div`
     width: 100%;
   }
   @media (min-width: 760px) {
-    position: relative;
+    .menu-bar {
+      font-size: 3rem;
+    }
+    .navbar-toggle {
+      left: 5em;
+    }
     .nav-menu {
-      left: 0%;
+      left: -200%;
       width: 250px;
+      ul {
+        align-self: center;
+      }
+    }
+    .navbar {
+      position: relative;
+      top: 40px;
+      left: 20px;
     }
     .nav-menu-items {
       a {
@@ -115,12 +128,6 @@ export const MenuContainer = styled.div`
       img {
         margin: 40px 5px;
       }
-    }
-    .navbar {
-      display: none;
-    }
-    .navbar-toggle {
-      display: none;
     }
   }
 `;
