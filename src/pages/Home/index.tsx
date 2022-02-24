@@ -6,6 +6,7 @@ import { UserBadge } from "../../components/UserBadge";
 
 export const Home = () => {
   const { setOpenUserMenu, openUserMenu } = useModals();
+
   return (
     <Container>
       <div className="side-menu">
@@ -23,11 +24,13 @@ export const Home = () => {
         </div>
         {openUserMenu ? (
           <UserBadge
+            className={"login-model"}
             setOpenUserMenu={setOpenUserMenu}
             openUserMenu={openUserMenu}
           />
         ) : (
           <UserBadge
+            className={"login-model"}
             setOpenUserMenu={setOpenUserMenu}
             openUserMenu={openUserMenu}
           />

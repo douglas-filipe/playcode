@@ -1,5 +1,5 @@
 import { MenuContainer } from "./style";
-import logo from "../../assets/img/logo.png";
+import logo from "../../../assets/img/logo.png";
 import * as Icon from "react-icons/ai";
 import { FaHistory } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
@@ -7,15 +7,15 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { BiGroup } from "react-icons/bi";
 
-export const SideMenu = () => {
+export const MenuMobile = () => {
   const [sidebar, setSidebar] = useState<boolean>(false);
   const showMenu = () => setSidebar(!sidebar);
 
   return (
     <MenuContainer>
-      <div className={sidebar === false ? "navbar navopen" : "navbar"}>
+      <div className={!sidebar ? "navbar navopen" : "navbar"}>
         <Link to="#" className="menu-bar">
-          <Icon.AiOutlineAppstore onClick={showMenu} />
+          <Icon.AiOutlineAppstore className="mobileIcon" onClick={showMenu} />
         </Link>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
@@ -35,7 +35,7 @@ export const SideMenu = () => {
             </Link>
           </li>
           <li className="nav-text">
-            <Link to="/in-high">
+            <Link to="#">
               <Icon.AiFillFire />
               <span>Em alta</span>
             </Link>
@@ -54,7 +54,7 @@ export const SideMenu = () => {
           </li>
 
           <li className="nav-text">
-            <Link to="/rooms">
+            <Link to="#">
               <BiGroup />
               <span>Grupos</span>
             </Link>

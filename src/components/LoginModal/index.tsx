@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillCloseCircle, AiOutlineMail } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth";
 import api from "../../services/api";
 import { Container } from "./LoginModal.styles";
@@ -9,6 +9,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { PulseLoader } from "react-spinners";
 import { useModals } from "../../contexts/Modals";
 import { toast } from "react-toastify";
+
 interface IdataLogin {
   email?: string;
   password?: string;
@@ -18,6 +19,7 @@ interface IAxiosResponseLogin {
   token: string;
   id: string;
   name: string;
+  email: string;
 }
 
 export const LoginModal = () => {
@@ -25,6 +27,7 @@ export const LoginModal = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { handleSubmit, register } = useForm();
+
   //const navigate = useNavigate();
   const { setToken } = useAuth();
   const { openModalLogin, setOpenModalLogin, setOpenModalSignup } = useModals();
@@ -35,9 +38,12 @@ export const LoginModal = () => {
       const response = await api.post<IAxiosResponseLogin>("/login", data);
       localStorage.setItem("@playcode/token", response.data.token);
       localStorage.setItem("@playcode/username", response.data.name);
+      localStorage.setItem("@playcode/email", response.data.email);
+
       setToken(response.data.token);
       setLoading(false);
       setOpenModalLogin(false);
+
       toast.success("Sucesso ao logar!", { theme: "dark" });
     } catch (e) {
       toast.error("Error ao fazer o login!", { theme: "dark" });
