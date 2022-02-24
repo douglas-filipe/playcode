@@ -24,7 +24,7 @@ export const Container = styled.div`
   @media screen {
   }
   @media (min-width: 760px) {
-    top: 40px;
+    top: 0px;
     right: 10px;
     span {
       cursor: pointer;

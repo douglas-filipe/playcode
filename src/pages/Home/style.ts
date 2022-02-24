@@ -30,6 +30,7 @@ export const Container = styled.div`
     .search {
       grid-area: search;
 
+      margin: 70px 0 20px 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -98,21 +99,34 @@ export const Container = styled.div`
         " content-boxII content-boxII";
 
       .search {
+        margin: 0;
         top: 10px;
-        margin-left: 5rem;
+        margin-left: 1.1rem;
         justify-content: flex-start;
       }
 
       .content-boxI {
+        section {
+          width: 100%;
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+        }
         span {
-          margin-left: 5rem;
           font-size: 2rem;
         }
       }
       .content-boxII {
         span {
-          margin-left: 5rem;
           font-size: 2rem;
+        }
+        section {
+          width: 100%;
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
         }
       }
     }
