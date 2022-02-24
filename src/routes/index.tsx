@@ -5,6 +5,7 @@ import { Home } from "../pages/Home";
 import { ListRooms } from "../pages/ListRooms";
 import { UserProfile } from "../pages/Profile";
 import { Recents } from "../pages/Recents";
+import { WatchVideo } from "../pages/WatchVideo";
 
 export const RoutesMain = () => {
   return (
@@ -14,7 +15,7 @@ export const RoutesMain = () => {
       <Route path="/recents" element={<Recents />} />
       <Route path="/rooms/:room_id" element={<Chat />} />
       <Route path="/in-high" element={<InHigh />} />
-      <Route path="/watch" />
+      <Route path="/watch/:id" element={<WatchVideo />} />
       <Route path="/profile" element={<UserProfile />} />
     </Routes>
   );

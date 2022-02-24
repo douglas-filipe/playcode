@@ -1,5 +1,5 @@
 import { Container } from "./WatchVideo.styles";
 
 export const WatchVideo = () => {
-  <Container></Container>;
+  return <Container></Container>;
 };

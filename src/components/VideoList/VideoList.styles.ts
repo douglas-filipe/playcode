@@ -4,6 +4,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
+  width: 285px;
+  height: 228px;
   .title {
     color: white;
     margin-top: 11px;
@@ -33,8 +35,8 @@ export const Container = styled.div`
 
   .thumb {
     margin-top: 19px;
-    width: 306px;
-    height: 228px;
+    width: 100%;
+    height: 100%;
     background: red;
     position: relative;
 
