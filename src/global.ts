@@ -31,6 +31,7 @@ html, body, div, span, applet, object, iframe,
         -webkit-tap-highlight-color: transparent;
         background: #1d1c2a;
         color: white;
+        overflow-x: hidden;
     }
 
     :root{

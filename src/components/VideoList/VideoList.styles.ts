@@ -6,6 +6,7 @@ export const Container = styled.div`
   margin: auto;
   width: 285px;
   height: 228px;
+  cursor: pointer;
   .title {
     color: white;
     margin-top: 11px;

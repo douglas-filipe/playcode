@@ -1,6 +1,7 @@
 import { Container } from "./VideoList.styles";
 import { AiFillLike } from "react-icons/ai";
 import view from "../../assets/icons/view.svg";
+import { useNavigate } from "react-router-dom";
 interface Ivideos {
   id: string;
   likes: number;
@@ -26,6 +27,7 @@ export const VideoList = ({
   name_channel,
   text,
 }: Ivideos) => {
+  const navigate = useNavigate();
   return (
     <Container>
       <div className="channel">
@@ -39,7 +41,12 @@ export const VideoList = ({
         </div>
         <h4>{name_channel}</h4>
       </div>
-      <div className="thumb">
+      <div
+        className="thumb"
+        onClick={() => {
+          navigate(`/watch/${id}`);
+        }}
+      >
         <div className="downThumb">
           <div className="views">
             <div className="viewIcon">
