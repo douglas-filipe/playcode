@@ -41,6 +41,8 @@ html, body, div, span, applet, object, iframe,
         --second-light:    #535A6B;
         --contrast:        #30B2A8;
         --hover:           #2D2F3D;
+        --yellow:          #F2DC5D;
+        --red:             #AF1B3F
 
 
     }

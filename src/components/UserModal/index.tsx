@@ -35,6 +35,8 @@ export const UserModal = () => {
           <p
             onClick={() => {
               localStorage.removeItem("@playcode/token");
+              localStorage.removeItem("@playcode/username");
+              localStorage.removeItem("@playcode/email");
               setToken("");
             }}
           >

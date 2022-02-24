@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
 
 //HOME PAGE BODY
 
@@ -35,27 +36,6 @@ export const Container = styled.div`
     }
     .login-model {
       grid-area: login-model;
-
-      position: absolute;
-      top: 0;
-      right: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 1rem;
-
-      font-size: 1.1rem;
-      span {
-        margin: 0 2px 0 10px;
-      }
-      svg {
-        color: var(--contrast);
-        font-size: 1.2rem;
-      }
-      .user-icon {
-        font-size: 2rem;
-      }
     }
     .content-boxI {
       grid-area: content-boxI;
@@ -123,21 +103,6 @@ export const Container = styled.div`
         justify-content: flex-start;
       }
 
-      .login-model {
-        top: 40px;
-        right: 10px;
-        span {
-          cursor: pointer;
-        }
-
-        font-size: 1.5rem;
-        svg {
-          cursor: pointer;
-        }
-        .user-icon {
-          font-size: 3rem;
-        }
-      }
       .content-boxI {
         span {
           margin-left: 5rem;
@@ -200,3 +165,7 @@ export const InputField = styled(TextField)`
     }
   }
 `;
+
+//MUI BUTTON
+
+export const MuiButton = styled(Button)``;
