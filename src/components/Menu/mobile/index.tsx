@@ -35,7 +35,7 @@ export const MenuMobile = () => {
             </Link>
           </li>
           <li className="nav-text">
-            <Link to="#">
+            <Link to="/in-high">
               <Icon.AiFillFire />
               <span>Em alta</span>
             </Link>
@@ -54,7 +54,7 @@ export const MenuMobile = () => {
           </li>
 
           <li className="nav-text">
-            <Link to="#">
+            <Link to="/rooms">
               <BiGroup />
               <span>Grupos</span>
             </Link>

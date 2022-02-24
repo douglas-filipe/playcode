@@ -7,6 +7,8 @@ import View from "../../assets/icons/view.svg";
 import { useAuth } from "../../contexts/Auth";
 import { useModals } from "../../contexts/Modals";
 import { toast } from "react-toastify";
+import { MenuMobile } from "../../components/Menu/mobile";
+import { RotateLoader } from "react-spinners";
 
 interface IVideo {
   id: string;
@@ -136,6 +138,7 @@ export const WatchVideo = () => {
 
   return (
     <Container>
+      <MenuMobile />
       {loading ? (
         <>
           <section className="channelSubscribe">
@@ -202,7 +205,12 @@ export const WatchVideo = () => {
           </section>
         </>
       ) : (
-        <div>Carregando</div>
+        <div className="loadingMessage">
+          <div className="Loading">
+            <RotateLoader color="yellow" />
+          </div>
+          <span>Carregando video...</span>
+        </div>
       )}
     </Container>
   );

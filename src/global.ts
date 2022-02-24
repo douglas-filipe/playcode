@@ -34,6 +34,10 @@ html, body, div, span, applet, object, iframe,
         overflow-x: hidden;
     }
 
+    html{
+        background: #1d1c2a;
+    }
+
     :root{
         --backgroud-color: #1D1C29;
         --primary-dark:    #090817;

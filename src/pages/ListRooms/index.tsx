@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import { MenuMobile } from "../../components/Menu/mobile";
 import { Room } from "../../components/Room";
 import { Container } from "./ListRooms.styles";
 
@@ -22,13 +23,16 @@ export const ListRooms = () => {
   }, []);
 
   return (
-    <Container>
-      <h1>Selecione uma sala</h1>
-      <section className="listRooms">
-        {rooms.map((e) => {
-          return <Room key={e.id} id={e.id} name={e.name} img={e.img} />;
-        })}
-      </section>
-    </Container>
+    <>
+      <MenuMobile />
+      <Container>
+        <h1>Selecione uma sala</h1>
+        <section className="listRooms">
+          {rooms.map((e) => {
+            return <Room key={e.id} id={e.id} name={e.name} img={e.img} />;
+          })}
+        </section>
+      </Container>
+    </>
   );
 };

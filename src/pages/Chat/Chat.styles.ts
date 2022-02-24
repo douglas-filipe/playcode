@@ -6,6 +6,7 @@ export const Container = styled.div`
   width: 100vw;
   overflow-x: hidden;
   overflow-y: hidden;
+  margin-top: 50px;
 
   .loadingMessage {
     width: 100vw;
@@ -143,6 +144,7 @@ export const Container = styled.div`
   }
 
   @media (min-width: 768px) {
+    margin-top: 120px;
     form {
       width: 700px;
       input {

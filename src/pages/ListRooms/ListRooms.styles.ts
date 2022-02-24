@@ -3,9 +3,10 @@ import styled from "styled-components";
 export const Container = styled.main`
   background-color: #323149;
   padding: 10px;
-  width: 90%;
+  width: 80%;
   margin: auto;
   height: 301px;
+  margin-top: 100px;
   h1{
     padding: 20px 0px;
     text-align: center;
@@ -16,5 +17,9 @@ export const Container = styled.main`
     display: flex;
     gap: 10px;
     justify-content: center;
+  }
+
+  @media(min-width: 768px){
+    margin-top: 150px;
   }
 `;

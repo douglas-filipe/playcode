@@ -5,7 +5,17 @@ export const Container = styled.main`
   flex-direction: column;
   margin: auto;
   width: 90vw;
-  margin-top: 20px;
+  margin-top: 50px;
+
+  .loadingMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .Loading {
+      padding: 40px;
+    }
+  }
 
   .channelSubscribe {
     display: flex;
@@ -115,6 +125,7 @@ export const Container = styled.main`
 
   @media (min-width: 768px) {
     width: 700px;
+    margin-top: 150px;
 
     .channelSubscribe {
       flex-direction: row;

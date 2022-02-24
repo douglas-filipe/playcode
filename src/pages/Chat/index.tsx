@@ -7,6 +7,7 @@ import api, { deploy } from "../../services/api";
 import { Container } from "./Chat.styles";
 import { IoMdSend } from "react-icons/io";
 import { RotateLoader } from "react-spinners";
+import { MenuMobile } from "../../components/Menu/mobile";
 
 interface IsendMessage {
   text?: string;
@@ -106,6 +107,7 @@ export const Chat = () => {
 
   return (
     <Container>
+      <MenuMobile />
       {loading ? (
         <>
           <div className="Messages" ref={messageEl}>
