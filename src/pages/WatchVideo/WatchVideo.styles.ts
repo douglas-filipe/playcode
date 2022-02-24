@@ -67,6 +67,7 @@ export const Container = styled.main`
       cursor: pointer;
     }
 
+
     .subscribe .subscribeConfirm {
       background: #2d2f3d;
     }
@@ -127,15 +128,21 @@ export const Container = styled.main`
     width: 700px;
     margin-top: 150px;
 
+    
     .channelSubscribe {
       flex-direction: row;
       width: 100%;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
       .subscribe {
         margin: 0px;
       }
+      .subscribe button{
+        padding: 10px 25px;
+        font-size: 0.9rem;
+      }
       .channel {
-        margin-bottom: 30px;
         .photo {
           width: 50px;
           height: 50px;

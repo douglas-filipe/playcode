@@ -22,6 +22,7 @@ interface IAxiosResponseLogin {
   token: string;
   id: string;
   name: string;
+  email: string;
 }
 
 export const SignupModal = () => {
@@ -40,6 +41,9 @@ export const SignupModal = () => {
       setLoading(true);
       await api.post<IAxiosResponseLogin>("/users", data);
       const responseLogin = await api.post<IAxiosResponseLogin>("/login", data);
+      localStorage.setItem("@playcode/token", responseLogin.data.token);
+      localStorage.setItem("@playcode/username", responseLogin.data.name);
+      localStorage.setItem("@playcode/email", responseLogin.data.email);
       setOpenModalSignup(false);
       setLoading(false);
       setToken(responseLogin.data.token);

@@ -12,7 +12,7 @@ export const Container = styled.div<IstylesPropsUserModal>`
   background: #121018;
   box-shadow: 1px 2px 4px #000000;
   visibility: ${(props) => (props.openUserMenu ? "visible" : "hidden")};
-
+  z-index: 99;
   a,
   p {
     color: white;
