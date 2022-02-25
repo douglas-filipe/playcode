@@ -9,6 +9,8 @@ import { useModals } from "../../contexts/Modals";
 import { toast } from "react-toastify";
 import { MenuMobile } from "../../components/Menu/mobile";
 import { RotateLoader } from "react-spinners";
+import { FaComments } from "react-icons/fa";
+import { IoIosAddCircle } from "react-icons/io";
 
 interface IVideo {
   id: string;
@@ -202,6 +204,30 @@ export const WatchVideo = () => {
               <p>{video.description}</p>
               <div className="barra"></div>
             </div>
+          </section>
+
+          <section className="comments">
+            <div className="titleComments">
+              <FaComments />
+              <span>Comentários</span>
+            </div>
+            <div className="barra"></div>
+            <form>
+              <input />
+              <IoIosAddCircle />
+            </form>
+
+            <section className="comment">
+              <div className="commentUserInfo">
+                <div className="img"></div>
+                <p>Nome do usuário</p>
+              </div>
+              <p>Comentário do usuário</p>
+              <div className="reactionComment">
+                <AiFillLike />
+                <span>1</span>
+              </div>
+            </section>
           </section>
         </>
       ) : (

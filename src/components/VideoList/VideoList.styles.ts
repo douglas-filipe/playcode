@@ -4,9 +4,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 285px;
+  width: 290px;
   height: 228px;
-  cursor: pointer;
   .title {
     color: white;
     margin-top: 11px;

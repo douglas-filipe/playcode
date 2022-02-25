@@ -15,7 +15,7 @@ export const Container = styled.main`
   .videosRecentsList {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 30px;
   }
 
   @media (min-width: 768px) {

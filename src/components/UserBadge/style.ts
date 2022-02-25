@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
-  top: 0;
+  top: 2px;
   right: 0;
 
   display: flex;
@@ -24,7 +24,7 @@ export const Container = styled.div`
   @media screen {
   }
   @media (min-width: 760px) {
-    top: 0px;
+    top: 45px;
     right: 10px;
     span {
       cursor: pointer;

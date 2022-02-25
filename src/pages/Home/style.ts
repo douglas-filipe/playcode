@@ -29,7 +29,6 @@ export const Container = styled.div`
 
     .search {
       grid-area: search;
-
       margin: 70px 0 20px 0;
       display: flex;
       align-items: center;
