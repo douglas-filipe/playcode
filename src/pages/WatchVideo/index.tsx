@@ -11,6 +11,7 @@ import { MenuMobile } from "../../components/Menu/mobile";
 import { RotateLoader } from "react-spinners";
 import { FaComments } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
+import { useForm } from "react-hook-form";
 
 interface IVideo {
   id: string;
@@ -53,6 +54,7 @@ export const WatchVideo = () => {
   const [userDetails, setUserDetails] = useState<IuserDetails>(
     {} as IuserDetails
   );
+  const [commentInput, setCommentInput] = useState("");
   const { token } = useAuth();
   const { setOpenModalLogin } = useModals();
   useEffect(() => {
@@ -138,6 +140,26 @@ export const WatchVideo = () => {
     }
   };
 
+  const onSubmit = async () => {
+    if (token) {
+      await api.post(
+        "/comments",
+        {
+          description: commentInput,
+          videoId: video.id,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      reqVideoChannel();
+      setCommentInput("");
+    } else {
+      toast.error("Faça o login", { theme: "dark" });
+      setOpenModalLogin(true);
+    }
+  };
+
+  const { handleSubmit, register } = useForm();
+  console.log(video);
   return (
     <Container>
       <MenuMobile />
@@ -212,22 +234,37 @@ export const WatchVideo = () => {
               <span>Comentários</span>
             </div>
             <div className="barra"></div>
-            <form>
-              <input />
-              <IoIosAddCircle />
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                {...(register("comment"), { required: true })}
+                placeholder="Insira um comentário"
+                value={commentInput}
+                onChange={(e) => setCommentInput(e.target.value)}
+              />
+              <button type="submit">
+                <IoIosAddCircle />
+              </button>
             </form>
 
-            <section className="comment">
-              <div className="commentUserInfo">
-                <div className="img"></div>
-                <p>Nome do usuário</p>
-              </div>
-              <p>Comentário do usuário</p>
-              <div className="reactionComment">
-                <AiFillLike />
-                <span>1</span>
-              </div>
-            </section>
+            {video.comments.map((e: any) => {
+              return (
+                <>
+                  <section className="comment">
+                    <div className="commentUserInfo">
+                      <div className="img">
+                        <p>{e.user.name.substring(0, 1)}</p>
+                      </div>
+                      <p className="nameUser">{e.user.name}</p>
+                    </div>
+                    <p>{e.description}</p>
+                    <div className="reactionComment">
+                      <AiFillLike />
+                      <span>{e.likes}</span>
+                    </div>
+                  </section>
+                </>
+              );
+            })}
           </section>
         </>
       ) : (

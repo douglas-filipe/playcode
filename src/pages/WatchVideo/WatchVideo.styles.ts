@@ -6,6 +6,110 @@ export const Container = styled.main`
   margin: auto;
   width: 90vw;
 
+  .reactionComment {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 30px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .titleComments {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      span {
+        font-size: 1.4rem;
+      }
+      svg {
+        color: #2d2f3d;
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      background: #2d2f3d;
+      width: 250px;
+      height: 36px;
+      border-radius: 10px;
+      input {
+        background: none;
+        border: none;
+        outline: none;
+        color: white;
+        height: 100%;
+        padding-left: 10px;
+        font-size: 14px;
+      }
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        svg {
+          color: white;
+        }
+      }
+      svg {
+        padding-right: 10px;
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .barra {
+      width: 100px;
+      height: 0.5px;
+      background: #7a7a7a;
+      margin-bottom: 20px;
+    }
+  }
+
+  .comment {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .commentUserInfo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      div {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: #2e81ee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: bold;
+        p {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+
   .loadingMessage {
     display: flex;
     justify-content: center;
