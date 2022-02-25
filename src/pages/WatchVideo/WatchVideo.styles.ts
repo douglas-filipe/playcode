@@ -5,7 +5,6 @@ export const Container = styled.main`
   flex-direction: column;
   margin: auto;
   width: 90vw;
-  margin-top: 50px;
 
   .loadingMessage {
     display: flex;
@@ -20,6 +19,7 @@ export const Container = styled.main`
   .channelSubscribe {
     display: flex;
     flex-direction: column;
+    padding-top: 60px;
     .channel {
       display: flex;
       flex-direction: column;
@@ -66,7 +66,6 @@ export const Container = styled.main`
       border: none;
       cursor: pointer;
     }
-
 
     .subscribe .subscribeConfirm {
       background: #2d2f3d;
@@ -126,11 +125,10 @@ export const Container = styled.main`
 
   @media (min-width: 768px) {
     width: 700px;
-    margin-top: 150px;
 
-    
     .channelSubscribe {
       flex-direction: row;
+      padding-top: 150px;
       width: 100%;
       justify-content: space-between;
       align-items: center;
@@ -138,7 +136,7 @@ export const Container = styled.main`
       .subscribe {
         margin: 0px;
       }
-      .subscribe button{
+      .subscribe button {
         padding: 10px 25px;
         font-size: 0.9rem;
       }
