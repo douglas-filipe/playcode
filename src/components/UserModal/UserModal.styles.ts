@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IstylesPropsUserModal } from "./UserModal.types";
 
 export const Container = styled.div<IstylesPropsUserModal>`
+  z-index: 9999;
   position: absolute;
   background-color: blue;
   display: flex;

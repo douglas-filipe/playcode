@@ -72,21 +72,23 @@ export const Home = () => {
         <div className="content-boxI">
           <span>Em alta</span>
           <section>
-            {listVideosInHigh.slice(0, 3).map((e) => {
+            {listVideosInHigh.slice(3, 6).map((e) => {
               return (
-                <VideoList
-                  id={e.id}
-                  likes={e.likes}
-                  avatarUrl={e.channel.avatarUrl}
-                  id_channel={e.channel.id}
-                  name={e.name}
-                  name_channel={e.channel.name}
-                  thumburl={e.thumburl}
-                  videourl={e.videourl}
-                  views={e.views}
-                  key={e.id}
-                  text={"Teste"}
-                />
+                <div className="video-card">
+                  <VideoList
+                    id={e.id}
+                    likes={e.likes}
+                    avatarUrl={e.channel.avatarUrl}
+                    id_channel={e.channel.id}
+                    name={e.name}
+                    name_channel={e.channel.name}
+                    thumburl={e.thumburl}
+                    videourl={e.videourl}
+                    views={e.views}
+                    key={e.id}
+                    text={"Teste"}
+                  />
+                </div>
               );
             })}
           </section>
@@ -99,19 +101,21 @@ export const Home = () => {
           <section>
             {listVideosRecents.slice(0, 3).map((e) => {
               return (
-                <VideoList
-                  id={e.id}
-                  likes={e.likes}
-                  avatarUrl={e.channel.avatarUrl}
-                  id_channel={e.channel.id}
-                  name={e.name}
-                  name_channel={e.channel.name}
-                  thumburl={e.thumburl}
-                  videourl={e.videourl}
-                  views={e.views}
-                  key={e.id}
-                  text={"Teste"}
-                />
+                <div className="video-card">
+                  <VideoList
+                    id={e.id}
+                    likes={e.likes}
+                    avatarUrl={e.channel.avatarUrl}
+                    id_channel={e.channel.id}
+                    name={e.name}
+                    name_channel={e.channel.name}
+                    thumburl={e.thumburl}
+                    videourl={e.videourl}
+                    views={e.views}
+                    key={e.id}
+                    text={"Teste"}
+                  />
+                </div>
               );
             })}
           </section>

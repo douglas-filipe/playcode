@@ -54,6 +54,11 @@ export const Container = styled.div`
         font-size: 1.5rem;
         font-weight: bold;
       }
+      section {
+        .video-card {
+          margin-bottom: 90px;
+        }
+      }
     }
     .content-boxII {
       grid-area: content-boxII;
@@ -71,6 +76,11 @@ export const Container = styled.div`
         align-self: flex-start;
         font-size: 1.5rem;
         font-weight: bold;
+      }
+      section {
+        .video-card {
+          margin-bottom: 90px;
+        }
       }
     }
   }
@@ -98,19 +108,19 @@ export const Container = styled.div`
         " content-boxII content-boxII";
 
       .search {
-        margin: 0;
-        top: 10px;
+        margin-top: 20px;
         margin-left: 1.1rem;
         justify-content: flex-start;
+        align-self: start;
       }
 
       .content-boxI {
         section {
           width: 100%;
-          margin-top: 10px;
           display: flex;
           align-items: center;
           justify-content: space-evenly;
+          flex-wrap: wrap;
         }
         span {
           font-size: 2rem;
@@ -122,10 +132,11 @@ export const Container = styled.div`
         }
         section {
           width: 100%;
-          margin-top: 10px;
+
           display: flex;
           align-items: center;
           justify-content: space-around;
+          flex-wrap: wrap;
         }
       }
     }

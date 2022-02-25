@@ -101,9 +101,15 @@ export const MenuContainer = styled.div`
   @media (min-width: 760px) {
     .menu-bar {
       font-size: 3rem;
+      padding: 0;
+      margin: 0;
+      svg {
+        margin-top: 1rem;
+      }
     }
     .navbar-toggle {
-      left: 5em;
+      /* left: 5em; */
+      display: none;
     }
     .nav-menu {
       left: -200%;
@@ -114,7 +120,8 @@ export const MenuContainer = styled.div`
     }
     .navbar {
       position: relative;
-      top: 40px;
+      padding: 0;
+      top: 0;
       left: 20px;
     }
     .nav-menu-items {

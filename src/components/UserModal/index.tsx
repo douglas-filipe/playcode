@@ -27,7 +27,7 @@ export const UserModal = () => {
             <img src={edit} alt="Editar canal" />
           </Link>
 
-          <Link to={"/"}>
+          <Link to={"/createChannel"}>
             <span>Seu canal</span>
             <img src={video} alt="Seu canal" />
           </Link>

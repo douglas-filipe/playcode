@@ -7,10 +7,11 @@ export const Container = styled.div`
   width: 290px;
   height: 228px;
   .title {
+    max-width: 250px;
     color: white;
     margin-top: 11px;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 14.5px;
   }
 
   .channel {
@@ -41,8 +42,8 @@ export const Container = styled.div`
     position: relative;
 
     .img {
-      width: 100%;
-      height: 100%;
+      width: 290px;
+      height: 200px;
       background-color: black;
       img {
         width: 100%;
