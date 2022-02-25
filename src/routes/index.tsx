@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { InHigh } from "../pages/ InHigh";
+import { UserChannel } from "../pages/Channel";
 import { Chat } from "../pages/Chat";
 import { Home } from "../pages/Home";
 import { ListRooms } from "../pages/ListRooms";
@@ -17,6 +18,7 @@ export const RoutesMain = () => {
       <Route path="/in-high" element={<InHigh />} />
       <Route path="/watch/:id" element={<WatchVideo />} />
       <Route path="/profile" element={<UserProfile />} />
+      <Route path="/createChannel" element={<UserChannel />} />
     </Routes>
   );
 };

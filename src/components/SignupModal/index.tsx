@@ -47,6 +47,9 @@ export const SignupModal = () => {
       setOpenModalSignup(false);
       setLoading(false);
       setToken(responseLogin.data.token);
+      localStorage.setItem("@playcode/username", responseLogin.data.name);
+      localStorage.setItem("@playcode/email", responseLogin.data.email);
+
       toast.success("Sucesso ao criar a sua conta!", { theme: "dark" });
     } catch (e) {
       toast.error("Erro ao criar sua conta!", { theme: "dark" });
