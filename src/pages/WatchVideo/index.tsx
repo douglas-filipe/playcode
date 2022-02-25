@@ -100,7 +100,6 @@ export const WatchVideo = () => {
         { Teste: "" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(response.data);
       await reqVideoChannel();
     } else {
       toast.error("Faça o login", { theme: "dark" });
@@ -157,9 +156,26 @@ export const WatchVideo = () => {
       setOpenModalLogin(true);
     }
   };
+  const reqLikeComment = async (id: string) => {
+    try {
+      if (token) {
+        await api.post(
+          `/comments/like/${id}`,
+          { Teste: "" },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        reqVideoChannel();
+      } else {
+        toast.error("Faça o login", { theme: "dark" });
+        setOpenModalLogin(true);
+      }
+    } catch {
+      toast.error("Faça o login", { theme: "dark" });
+      setOpenModalLogin(true);
+    }
+  };
 
   const { handleSubmit, register } = useForm();
-  console.log(video);
   return (
     <Container>
       <MenuMobile />
@@ -249,7 +265,7 @@ export const WatchVideo = () => {
             {video.comments.map((e: any) => {
               return (
                 <>
-                  <section className="comment">
+                  <section key={e.id} className="comment">
                     <div className="commentUserInfo">
                       <div className="img">
                         <p>{e.user.name.substring(0, 1)}</p>
@@ -258,7 +274,7 @@ export const WatchVideo = () => {
                     </div>
                     <p>{e.description}</p>
                     <div className="reactionComment">
-                      <AiFillLike />
+                      <AiFillLike onClick={() => reqLikeComment(e.id)} />
                       <span>{e.likes}</span>
                     </div>
                   </section>
