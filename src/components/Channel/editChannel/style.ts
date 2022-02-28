@@ -27,6 +27,10 @@ export const Container = styled.div`
 
       border-radius: 50%;
 
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+
       background-color: var(--primary-light);
     }
     form {

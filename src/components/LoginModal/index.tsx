@@ -9,6 +9,8 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { PulseLoader } from "react-spinners";
 import { useModals } from "../../contexts/Modals";
 import { toast } from "react-toastify";
+import { useUserInfo } from "../../contexts/User";
+import { useChannel } from "../../contexts/channel";
 
 interface IdataLogin {
   email?: string;
@@ -30,26 +32,37 @@ export const LoginModal = () => {
 
   //const navigate = useNavigate();
   const { setToken } = useAuth();
+  const { setUserData } = useUserInfo();
   const { openModalLogin, setOpenModalLogin, setOpenModalSignup } = useModals();
+  const { setChannelData } = useChannel();
 
   const onSubmit = async (data: IdataLogin) => {
     try {
       setLoading(true);
       const response = await api.post<IAxiosResponseLogin>("/login", data);
       localStorage.setItem("@playcode/token", response.data.token);
-      localStorage.setItem("@playcode/username", response.data.name);
-      localStorage.setItem("@playcode/email", response.data.email);
+      localStorage.setItem("@playcode/user", JSON.stringify(response.data));
 
       setToken(response.data.token);
+      setUserData(response.data);
       setLoading(false);
       setOpenModalLogin(false);
-
       toast.success("Sucesso ao logar!", { theme: "dark" });
+
+      const channelInfo = await api.get<any>("/users", {
+        headers: {
+          Authorization: `Bearer ${response.data.token}`,
+        },
+      });
+      if (channelInfo.data["channel"]) {
+        setChannelData(channelInfo.data["channel"]);
+      }
     } catch (e) {
       toast.error("Error ao fazer o login!", { theme: "dark" });
       setLoading(false);
     }
   };
+
   return (
     <Container openModalLogin={openModalLogin}>
       <form onSubmit={handleSubmit(onSubmit)}>

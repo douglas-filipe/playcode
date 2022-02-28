@@ -72,9 +72,9 @@ export const Home = () => {
         <div className="content-boxI">
           <span>Em alta</span>
           <section>
-            {listVideosInHigh.slice(3, 6).map((e) => {
+            {listVideosInHigh.slice(3, 6).map((e, index) => {
               return (
-                <div className="video-card">
+                <div key={index} className="video-card">
                   <VideoList
                     id={e.id}
                     likes={e.likes}
@@ -99,9 +99,9 @@ export const Home = () => {
         <div className="content-boxII">
           <span>Recentes</span>
           <section>
-            {listVideosRecents.slice(0, 3).map((e) => {
+            {listVideosRecents.slice(0, 3).map((e, index) => {
               return (
-                <div className="video-card">
+                <div key={index + 1} className="video-card">
                   <VideoList
                     id={e.id}
                     likes={e.likes}
