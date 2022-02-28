@@ -16,7 +16,7 @@ export const Container = styled.div`
     justify-content: center;
 
     span {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
     }
     .profile-picture {
@@ -26,7 +26,9 @@ export const Container = styled.div`
       margin: 10px;
 
       border-radius: 50%;
-
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
       background-color: var(--primary-light);
     }
     form {
@@ -45,6 +47,9 @@ export const Container = styled.div`
         width: 280px;
         height: 280px;
         margin: 40px;
+      }
+      span {
+        font-size: 2rem;
       }
       form {
         .camera {

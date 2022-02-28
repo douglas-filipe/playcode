@@ -3,13 +3,16 @@ import * as Icons from "react-icons/fi";
 import { MdAccountCircle } from "react-icons/md";
 import { BadgeMenu } from "./userbadge.types";
 import { Container } from "./style";
+import { useUserInfo } from "../../contexts/User";
 
 export const UserBadge = ({
   setOpenUserMenu,
   openUserMenu,
   className,
 }: BadgeMenu) => {
-  const username = localStorage.getItem("@playcode/username");
+  const { userData } = useUserInfo();
+
+  const username = userData.name || "Login";
 
   return (
     <Container
@@ -17,7 +20,7 @@ export const UserBadge = ({
       onClick={() => setOpenUserMenu(!openUserMenu)}
     >
       <MdAccountCircle className="user-icon" />
-      {username ? <span>{username}</span> : <span>Login</span>}
+      <span>{username}</span>
       <Icons.FiChevronDown />
       <UserModal />
     </Container>

@@ -1,13 +1,26 @@
 import { createContext, useContext, useState } from "react";
-import { IUserProviderData, UserData, UserProp } from "./user.types";
+import { IUserProviderData, iUserData, UserProp } from "./user.types";
 
 const UsersContext = createContext<IUserProviderData>({} as IUserProviderData);
 
 export const UsersProvider = ({ children }: UserProp) => {
-  const [userData, setUserData] = useState<Array<UserData>>([]);
+  const user: iUserData = JSON.parse(
+    localStorage.getItem("@playcode/user") || "{}"
+  );
 
+  const [userData, setUserData] = useState<iUserData>(user);
+  const cleanUserData = () => {
+    let data = {
+      name: "",
+      email: "",
+      createdOn: "",
+      updatedOn: "",
+      id: "",
+    };
+    setUserData(data);
+  };
   return (
-    <UsersContext.Provider value={{ userData, setUserData }}>
+    <UsersContext.Provider value={{ userData, setUserData, cleanUserData }}>
       {children}
     </UsersContext.Provider>
   );
