@@ -80,12 +80,12 @@ export const WatchVideo = () => {
   };
   const reqVideoSubscribe = async (id: string) => {
     if (token) {
-      const response = await api.post(
+      await api.post(
         `/channel/subscribe/${id}`,
         { Teste: "" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(response.data);
+
       await reqVideoChannel();
     } else {
       toast.error("Faça o login", { theme: "dark" });
@@ -95,7 +95,7 @@ export const WatchVideo = () => {
 
   const reqVideoUnsubscribe = async (id: string) => {
     if (token) {
-      const response = await api.post(
+      await api.post(
         `/channel/unsubscribe/${id}`,
         { Teste: "" },
         { headers: { Authorization: `Bearer ${token}` } }

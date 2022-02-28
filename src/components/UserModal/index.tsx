@@ -9,20 +9,22 @@ import login from "../../assets/icons/login.svg";
 import recuperatePass from "../../assets/icons/recuperatePass.svg";
 import { useAuth } from "../../contexts/Auth";
 import { useModals } from "../../contexts/Modals";
+import { useUserInfo } from "../../contexts/User";
 
 export const UserModal = () => {
   const { token, setToken } = useAuth();
   const { openUserMenu, setOpenModalLogin, setOpenModalSignup } = useModals();
+  const { cleanUserData } = useUserInfo();
   return (
     <Container openUserMenu={openUserMenu}>
       {token ? (
         <>
-          <Link to={"/"}>
+          <Link to={"/uploadVideo"}>
             <span>Enviar vídeo</span>
             <img src={sendVideo} alt="Enviar video" />
           </Link>
 
-          <Link to={"/"}>
+          <Link to={"/editchannel"}>
             <span>Editar canal</span>
             <img src={edit} alt="Editar canal" />
           </Link>
@@ -35,9 +37,10 @@ export const UserModal = () => {
           <p
             onClick={() => {
               localStorage.removeItem("@playcode/token");
-              localStorage.removeItem("@playcode/username");
-              localStorage.removeItem("@playcode/email");
+              localStorage.removeItem("@playcode/user");
+
               setToken("");
+              cleanUserData();
             }}
           >
             <span>Sair</span>

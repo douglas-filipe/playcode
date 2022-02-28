@@ -6,10 +6,11 @@ import { ImUser } from "react-icons/im";
 import { RiLockPasswordFill as Lock } from "react-icons/ri";
 import { Container, InputBox, InputField } from "./style";
 import api from "../../services/api";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { useUserInfo } from "../../contexts/User";
 
-interface UserData {
+interface iUserData {
   name: string;
   email: string;
   createdOn: string;
@@ -18,30 +19,27 @@ interface UserData {
 
 export const UserProfile = () => {
   const [update, setUpdate] = useState<string>("");
-  const [userData, setUserData] = useState<UserData[]>([]);
-
-  const { setOpenUserMenu, openUserMenu } = useModals();
+  const { setOpenUserMenu, openUserMenu, setOpenModalLogin } = useModals();
+  const { userData, setUserData } = useUserInfo();
 
   const token = localStorage.getItem("@playcode/token");
-  const username = localStorage.getItem("@playcode/username");
-  const email = localStorage.getItem("@playcode/email");
+
   const inputEl = useRef<any>(null);
   const inputEmail = useRef<any>(null);
   const inputPassword = useRef<any>(null);
 
   const onSubmit = async (infoData: any) => {
     try {
-      const response = await api.patch<UserData>("/users", infoData, {
+      const response = await api.patch<iUserData>("/users", infoData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-      localStorage.setItem("@playcode/username", response.data.name);
-      localStorage.setItem("@playcode/email", response.data.email);
 
       setUpdate("");
-      setUserData([response.data]);
+      setUserData(response.data);
+      localStorage.setItem("@playcode/user", JSON.stringify(response.data));
 
       inputEl.current.children[0].children[0].value = "";
       inputEmail.current.children[0].children[0].value = "";
@@ -52,7 +50,7 @@ export const UserProfile = () => {
       console.log(err);
     }
   };
-  useEffect(() => {}, [userData]);
+
   return (
     <Container>
       <MenuMobile />
@@ -72,7 +70,7 @@ export const UserProfile = () => {
               autoComplete="off"
               ref={inputEl}
               onChange={(e) => setUpdate(e.target.value)}
-              placeholder={!username ? "Seu nome" : username}
+              placeholder={userData.name || "Seu nome"}
             />
           </div>
           <button
@@ -92,7 +90,7 @@ export const UserProfile = () => {
               onChange={(e) => setUpdate(e.target.value)}
               type="email"
               ref={inputEmail}
-              placeholder={!email ? "Seu email" : email}
+              placeholder={userData.email || "Seu email"}
             />
           </div>
           <button onClick={() => onSubmit({ email: update })}>

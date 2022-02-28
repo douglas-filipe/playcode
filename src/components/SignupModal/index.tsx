@@ -5,7 +5,6 @@ import {
   AiOutlineMail,
   AiOutlineUser,
 } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth";
 import api from "../../services/api";
 import { Container } from "./SignupModal.styles";
@@ -13,6 +12,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { PulseLoader } from "react-spinners";
 import { useModals } from "../../contexts/Modals";
 import { toast } from "react-toastify";
+import { useUserInfo } from "../../contexts/User";
 interface IdataLogin {
   email?: string;
   password?: string;
@@ -35,20 +35,22 @@ export const SignupModal = () => {
   const { setToken } = useAuth();
   const { openModalSignup, setOpenModalSignup, setOpenModalLogin } =
     useModals();
-
+  const { setUserData } = useUserInfo();
   const onSubmit = async (data: IdataLogin) => {
     try {
       setLoading(true);
       await api.post<IAxiosResponseLogin>("/users", data);
       const responseLogin = await api.post<IAxiosResponseLogin>("/login", data);
       localStorage.setItem("@playcode/token", responseLogin.data.token);
-      localStorage.setItem("@playcode/username", responseLogin.data.name);
-      localStorage.setItem("@playcode/email", responseLogin.data.email);
+      localStorage.setItem(
+        "@playcode/user",
+        JSON.stringify(responseLogin.data)
+      );
+
       setOpenModalSignup(false);
       setLoading(false);
       setToken(responseLogin.data.token);
-      localStorage.setItem("@playcode/username", responseLogin.data.name);
-      localStorage.setItem("@playcode/email", responseLogin.data.email);
+      setUserData(responseLogin.data);
 
       toast.success("Sucesso ao criar a sua conta!", { theme: "dark" });
     } catch (e) {
