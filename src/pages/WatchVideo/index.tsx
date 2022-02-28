@@ -67,6 +67,7 @@ export const WatchVideo = () => {
       reqWatchVideo();
     }, 5000);
   }, [id]);
+
   const reqVideoChannel = async () => {
     const response = await api.get(`/watch/${id}`);
     const responseChannelSubscribers = await api.get(
@@ -75,17 +76,26 @@ export const WatchVideo = () => {
     setVideo(response.data);
     setChannel(responseChannelSubscribers.data);
   };
+
   const reqWatchVideo = async () => {
     await api.get(`/watch/${id}/view`);
   };
+
   const reqVideoSubscribe = async (id: string) => {
     if (token) {
+      /* channel.subs.push({
+        channelId: id,
+        id: "gtertryh",
+        userId: userDetails.id,
+      });
+      setChannel(channel);
+      console.log(channel) */
       const response = await api.post(
         `/channel/subscribe/${id}`,
         { Teste: "" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(response.data);
+      console.log(channel);
       await reqVideoChannel();
     } else {
       toast.error("Faça o login", { theme: "dark" });

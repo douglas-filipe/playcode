@@ -3,15 +3,11 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { useAuth } from "../../contexts/Auth";
-import api, { deploy } from "../../services/api";
+import api, { deploy, local } from "../../services/api";
 import { Container } from "./Chat.styles";
 import { IoMdSend } from "react-icons/io";
 import { RotateLoader } from "react-spinners";
 import { MenuMobile } from "../../components/Menu/mobile";
-
-interface IsendMessage {
-  text?: string;
-}
 
 interface Imessage {
   id: string;
@@ -31,9 +27,10 @@ interface Iroom {
   img: string;
 }
 
+const socket = io(deploy);
+
 export const Chat = () => {
   const { room_id } = useParams<{ room_id: string }>();
-  const socket = io(deploy);
   const { name, user_id, token } = useAuth();
   const [inputMessage, setInputMessages] = useState("");
   const [userDetails, setUserDetails] = useState<IuserDetails>(
@@ -46,15 +43,6 @@ export const Chat = () => {
   const messageEl = useRef<null | HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [sendMessageBlock, setSendMessageBlock] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (messageEl) {
-      messageEl.current?.addEventListener("DOMNodeInserted", (event) => {
-        const { currentTarget: target }: any = event;
-        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
-      });
-    }
-  }, [messagesList]);
 
   const reqUserDetails = async () => {
     const response = await api.get("/users", {
@@ -69,41 +57,47 @@ export const Chat = () => {
   };
 
   useEffect(() => {
-    (async () => {
+    socket.on("message", (message) => {
+      setMessagesList([...messagesList, message]);
+    });
+  }, [messagesList]);
+
+  useEffect(() => {
+    const reqs = async () => {
       socket.emit("join", { name, room_id, user_id });
       await reqUserDetails();
       await reqRoomSearch();
+      api.get(`/messages/${room_id}`).then((response) => {
+        setMessagesList(response.data);
+      });
       setLoading(true);
-    })();
-  }, []);
-  useEffect(() => {
-    socket.on("message", (message) => {
-      setMessagesList(message);
-    });
-  }, []);
-
-  useEffect(() => {
-    socket.emit("get-messages-history", room_id);
-    socket.on("output-messages", (messages) => {
-      setMessagesList(messages);
-      setLoading(true);
-    });
+    };
+    reqs();
   }, []);
 
   const reqSendMessage = async () => {
     setSendMessageBlock(true);
+    const newMessage = {
+      text: inputMessage,
+      room_id,
+      user_id: userDetails.id,
+      name: userDetails.name,
+      id: "",
+    };
     const response = await api.post("/message", {
       text: inputMessage,
       room_id,
       user_id: userDetails.id,
       name: userDetails.name,
     });
-    setMessagesList([...messagesList, response.data]);
-    const message = [...messagesList, response.data];
-    socket.emit("messagesList", message, room_id);
+    socket.emit("messagesList", response.data, room_id);
     setInputMessages("");
     setSendMessageBlock(false);
   };
+
+  useEffect(() => {
+    messageEl.current?.scrollIntoView({ behavior: "auto" });
+  }, [messagesList]);
 
   return (
     <Container>
