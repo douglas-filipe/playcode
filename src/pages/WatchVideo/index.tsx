@@ -1,52 +1,24 @@
 import { useEffect, useState } from "react";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../../services/api";
 import { Container } from "./WatchVideo.styles";
-import View from "../../assets/icons/view.svg";
 import { useAuth } from "../../contexts/Auth";
 import { useModals } from "../../contexts/Modals";
 import { toast } from "react-toastify";
 import { MenuMobile } from "../../components/Menu/mobile";
-import { RotateLoader } from "react-spinners";
+import {
+  ClipLoader,
+  RotateLoader,
+  ScaleLoader,
+} from "react-spinners";
 import { FaComments } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
 import { useForm } from "react-hook-form";
-
-interface IVideo {
-  id: string;
-  name: string;
-  description: string;
-  thumburl: string;
-  videourl: string;
-  views: string;
-  duration: string;
-  likes: number;
-  createdOn: string;
-  updatedOn: string;
-  channel: {
-    id: string;
-    name: string;
-    avatarUrl: string;
-  };
-  likesvideos: any;
-  comments: string[];
-}
-
-interface Ichannel {
-  subs: any;
-  id: string;
-  name: string;
-  avatarUrl: string;
-}
-
-interface IuserDetails {
-  id: string;
-  name: string;
-}
+import { Ichannel, IuserDetails, IVideo } from "./WathVideo.types";
+import View from "../../assets/icons/view.svg";
+import api from "../../services/api";
 
 export const WatchVideo = () => {
-  const { id } = useParams<{ id: string }>();
   const [video, setVideo] = useState<IVideo>({} as IVideo);
   const [channel, setChannel] = useState<Ichannel>({} as Ichannel);
   const [loading, setLoading] = useState<boolean>(false);
@@ -55,6 +27,9 @@ export const WatchVideo = () => {
     {} as IuserDetails
   );
   const [commentInput, setCommentInput] = useState("");
+  const [subscribeLoad, setSubscribeload] = useState<boolean>(false);
+  const [commentsSendLoad, setCommentsSendLoad] = useState<boolean>(false);
+  const { id } = useParams<{ id: string }>();
   const { token } = useAuth();
   const { setOpenModalLogin } = useModals();
   useEffect(() => {
@@ -80,6 +55,7 @@ export const WatchVideo = () => {
   };
   const reqVideoSubscribe = async (id: string) => {
     if (token) {
+      setSubscribeload(true);
       await api.post(
         `/channel/subscribe/${id}`,
         { Teste: "" },
@@ -87,23 +63,28 @@ export const WatchVideo = () => {
       );
 
       await reqVideoChannel();
+      setSubscribeload(false);
     } else {
       toast.error("Faça o login", { theme: "dark" });
       setOpenModalLogin(true);
+      setSubscribeload(false);
     }
   };
 
   const reqVideoUnsubscribe = async (id: string) => {
     if (token) {
+      setSubscribeload(true);
       await api.post(
         `/channel/unsubscribe/${id}`,
         { Teste: "" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       await reqVideoChannel();
+      setSubscribeload(false);
     } else {
       toast.error("Faça o login", { theme: "dark" });
       setOpenModalLogin(true);
+      setSubscribeload(false);
     }
   };
 
@@ -141,6 +122,7 @@ export const WatchVideo = () => {
 
   const onSubmit = async () => {
     if (token) {
+      setCommentsSendLoad(true);
       await api.post(
         "/comments",
         {
@@ -151,7 +133,9 @@ export const WatchVideo = () => {
       );
       reqVideoChannel();
       setCommentInput("");
+      setCommentsSendLoad(false);
     } else {
+      setCommentsSendLoad(false);
       toast.error("Faça o login", { theme: "dark" });
       setOpenModalLogin(true);
     }
@@ -202,15 +186,27 @@ export const WatchVideo = () => {
                   return true;
                 }
               }) === undefined ? (
-                <button onClick={() => reqVideoSubscribe(channel.id)}>
-                  Inscreva-se
+                <button
+                  disabled={subscribeLoad}
+                  onClick={() => reqVideoSubscribe(channel.id)}
+                >
+                  {subscribeLoad ? (
+                    <ScaleLoader color="white" height={20} />
+                  ) : (
+                    <>Inscreva-se</>
+                  )}
                 </button>
               ) : (
                 <button
+                  disabled={subscribeLoad}
                   className="subscribeConfirm"
                   onClick={() => reqVideoUnsubscribe(channel.id)}
                 >
-                  Inscrito
+                  {subscribeLoad ? (
+                    <ScaleLoader color="white" height={20} />
+                  ) : (
+                    <>Inscrito</>
+                  )}
                 </button>
               )}
             </div>
@@ -257,8 +253,14 @@ export const WatchVideo = () => {
                 value={commentInput}
                 onChange={(e) => setCommentInput(e.target.value)}
               />
-              <button type="submit">
-                <IoIosAddCircle />
+              <button disabled={commentsSendLoad} type="submit">
+                {commentsSendLoad ? (
+                  <div className="loading">
+                    <ClipLoader size={25} color="white" />
+                  </div>
+                ) : (
+                  <IoIosAddCircle />
+                )}
               </button>
             </form>
 

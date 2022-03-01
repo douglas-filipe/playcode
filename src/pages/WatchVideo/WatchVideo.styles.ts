@@ -43,7 +43,7 @@ export const Container = styled.main`
       margin-bottom: 20px;
       background: #2d2f3d;
       width: 250px;
-      height: 36px;
+      height: 40px;
       border-radius: 10px;
       input {
         background: none;
@@ -53,23 +53,29 @@ export const Container = styled.main`
         height: 100%;
         padding-left: 10px;
         font-size: 14px;
+        height: 40px;
       }
 
       button {
         display: flex;
-        justify-content: center;
-        align-items: center;
         border: none;
         background-color: transparent;
         cursor: pointer;
+        width: 50px;
         svg {
           color: white;
         }
-      }
-      svg {
-        padding-right: 10px;
-        width: 30px;
-        height: 30px;
+        .loading {
+          margin-left: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        svg {
+          width: 30px;
+          height: 30px;
+          margin-left: 10px;
+        }
       }
     }
 
@@ -166,9 +172,10 @@ export const Container = styled.main`
       font-weight: bold;
       background: #ee2e31;
       border-radius: 2px;
-      padding: 5px 10px;
       border: none;
       cursor: pointer;
+      width: 100px;
+      height: 40px;
     }
 
     .subscribe .subscribeConfirm {
@@ -241,7 +248,6 @@ export const Container = styled.main`
         margin: 0px;
       }
       .subscribe button {
-        padding: 10px 25px;
         font-size: 0.9rem;
       }
       .channel {
